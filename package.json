@@ -39,6 +39,7 @@
     "startMail": "tsnd --transpile-only --ignore-watch node_modules --respawn src/maildummytest.ts",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"  
   }
 }
