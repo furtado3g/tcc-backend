@@ -83,7 +83,7 @@ export default class userController {
   async update(req:Request,res:Response){
     const {name,username,email,userType} = req.body
     const {authorization} = req.headers
-    if(!verifier.verifyNullIncommingFields({name,username,email,authorization})) return res.status(404).json({"error":"Campo obrigatório"});
+    if(!verifier.verifyNullIncommingFields({name,username,email,userType,authorization})) return res.status(404).json({"error":"Campo obrigatório"});
     //Checks whether the session is valid
     const logged = await session.verify(authorization)
     if(!logged.is_valid) return res.status(404).json({error:"Sessão inválida"});
