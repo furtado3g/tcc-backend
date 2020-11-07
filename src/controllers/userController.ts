@@ -92,7 +92,7 @@ export default class userController {
       name,
       username,
       email,
-      user_type:userType
+      user_type : userType
     })
     if(created != null){
       return res.json({"message":"Dados atualizados com sucesso"})

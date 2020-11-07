@@ -104,9 +104,9 @@ export default class UserModel{
         .where('username',user.username)
         .where('active',true)
         .update({
-            name:user.name,
-            email:user.email,
-            user_type : user.user_type,
+            name      :user.name,
+            email     :user.email,
+            user_type :user.user_type,
         })
         .then((data: any)=>{
             returnable.message = "Alteração de usuário realizado com sucesso"
