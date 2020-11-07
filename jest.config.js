@@ -148,7 +148,9 @@ module.exports = {
      "**/__tests__/**/*.[jt]s?(x)",
      "**/?(*.)+(spec|test).[tj]s?(x)"
    ],
-
+   transform: {
+    '^.+\\.ts?$': 'ts-jest',
+   },
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
   //   "\\\\node_modules\\\\"

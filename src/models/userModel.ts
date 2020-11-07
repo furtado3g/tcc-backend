@@ -57,6 +57,7 @@ export default class UserModel{
 
     async verifyUser(user:authUser){
         let returnable 
+        
         const usernameExists = await db('users')
         .select('*')
         .where('username',user.username)
@@ -84,6 +85,16 @@ export default class UserModel{
     async update(user:updtUserInterface){
         const returnable = {
             message: "message"
+        }
+        const emailExists = await db('users')
+        .select('*')
+        .where('email',user.email)
+        console.log('emailExists')
+        console.log(emailExists)
+        if(emailExists[0]){
+            return {
+                "error" : "Email já cadastrado"
+            }
         }
         const users = await db('users')
         .select('password')
