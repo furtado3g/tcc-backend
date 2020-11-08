@@ -96,7 +96,7 @@ export default class userController {
       'userid' : userid
     })
     if(created != null){
-      return res.json({"message":"Dados atualizados com sucesso"})
+      return res.json({"message":created})
     }else{
       return res.status(404).json({"message":"Erro ao cadastrar usuário"})
     }

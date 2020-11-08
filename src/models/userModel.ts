@@ -97,16 +97,13 @@ export default class UserModel{
         }
         await db('users')
         .where('id',user.userid)
-        .where('active',true)
         .update({
             name      :user.name,
             email     :user.email,
             user_type :user.user_type,
-            
         })
         .then((data: any)=>{
-            console.log(data)
-            returnable.message = "Alteração de usuário realizado com sucesso"
+            returnable.message = "Alteração de usuário realizado com sucesso"+JSON.stringify(data)
         })
         .catch((e: any)=>{
             returnable.message = "Erro ao atualizar usuário"
