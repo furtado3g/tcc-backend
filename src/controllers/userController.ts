@@ -63,12 +63,12 @@ export default class userController {
     const last_password = password
     const userModel = new UserModel()
     const created:any = await userModel.create({
-      name : name ,
-      username : username,
-      password : password,
-      email : email,
-      last_password : last_password,
-      user_type : user_type,
+      'name' : name ,
+      'username' : username,
+      'password' : password,
+      'email' : email,
+      'last_password' : last_password,
+      'user_type' : user_type,
     })
     let error = created.error
     if(created != null && !error){
@@ -81,18 +81,18 @@ export default class userController {
   }
 
   async update(req:Request,res:Response){
-    const {name,username,email,user_type} = req.body
+    const {name,username,email,userType} = req.body
     const {authorization} = req.headers
-    if(!verifier.verifyNullIncommingFields({name,username,email,user_type,authorization})) return res.status(404).json({"error":"Campo obrigatório"});
+    if(!verifier.verifyNullIncommingFields({name,username,email,authorization})) return res.status(404).json({"error":"Campo obrigatório"});
     //Checks whether the session is valid
     const logged = await session.verify(authorization)
     if(!logged.is_valid) return res.status(404).json({error:"Sessão inválida"});
     // check if any mandatory parameters do not exist
     const created = userModel.update({
-      name,
-      username,
-      email,
-      user_type
+      'name' : name,
+      'username' : username, 
+      'email' : email,
+      'user_type' : userType
     })
     if(created != null){
       return res.json({"message":"Dados atualizados com sucesso"})
