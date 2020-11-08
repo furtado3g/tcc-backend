@@ -105,6 +105,7 @@ export default class UserModel{
             
         })
         .then((data: any)=>{
+            console.log(data)
             returnable.message = "Alteração de usuário realizado com sucesso"
         })
         .catch((e: any)=>{
