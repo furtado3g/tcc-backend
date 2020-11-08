@@ -103,7 +103,8 @@ export default class UserModel{
             user_type :user.user_type,
         })
         .then((data: any)=>{
-            returnable.message = "Alteração de usuário realizado com sucesso" + JSON.stringify(data) 
+            console.log(data)
+            returnable.message = "Alteração de usuário realizado com sucesso" 
         })
         .catch((e: any)=>{
             returnable.message = "Erro ao atualizar usuário"
