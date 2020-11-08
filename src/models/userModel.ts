@@ -87,14 +87,6 @@ export default class UserModel{
         const returnable = {
             message: "message"
         }
-        const emailExists = await db('users')
-        .select('*')
-        .where('email',user.email)
-        if(emailExists[0]){
-            return {
-                "error" : "Email já cadastrado"
-            }
-        }
         await db('users')
         .where('id',user.userid)
         .update({
