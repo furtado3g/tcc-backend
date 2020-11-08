@@ -81,7 +81,7 @@ export default class userController {
   }
 
   async update(req:Request,res:Response){
-    const {name,username,email,Type} = req.body
+    const {name,username,email,type,userid} = req.body
     const {authorization} = req.headers
     if(!verifier.verifyNullIncommingFields({name,username,email,authorization})) return res.status(404).json({"error":"Campo obrigatório"});
     //Checks whether the session is valid
@@ -92,7 +92,8 @@ export default class userController {
       'name' : name,
       'username' : username, 
       'email' : email,
-      'user_type' : Type
+      'user_type' : type,
+      'userid' : userid
     })
     if(created != null){
       return res.json({"message":"Dados atualizados com sucesso"})

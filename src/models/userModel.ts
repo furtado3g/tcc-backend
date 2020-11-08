@@ -19,6 +19,7 @@ interface updtUserInterface{
     username:string;
     email:string;
     user_type : string;
+    userid:string;
 }
 
 interface authUser{
@@ -89,24 +90,19 @@ export default class UserModel{
         const emailExists = await db('users')
         .select('*')
         .where('email',user.email)
-        console.log('emailExists')
-        console.log(emailExists)
         if(emailExists[0]){
             return {
                 "error" : "Email já cadastrado"
             }
         }
-        const users = await db('users')
-        .select('password')
-        .where('username',user.username);
-        if(!users[0])return {message:"No user found"} 
         await db('users')
-        .where('username',user.username)
+        .where('id',user.userid)
         .where('active',true)
         .update({
             name      :user.name,
             email     :user.email,
             user_type :user.user_type,
+            
         })
         .then((data: any)=>{
             returnable.message = "Alteração de usuário realizado com sucesso"
