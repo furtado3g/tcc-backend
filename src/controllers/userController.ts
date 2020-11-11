@@ -48,7 +48,7 @@ export default class userController {
    const {userid,authorization} = req.headers
    let {password} = req.body
    // check if any mandatory parameters do not exist
-   const {name,username,email,user_type} = req.body
+   const {name,username,email,userType} = req.body
    const verifier = new verify();
    if(!verifier.verifyNullIncommingFields({name,username,email,password,userid,authorization})) return res.status(404).json({"error":"Campo obrigatório não informado"});
     //Checks whether the session is valid
@@ -68,7 +68,7 @@ export default class userController {
       'password' : password,
       'email' : email,
       'last_password' : last_password,
-      'user_type' : user_type,
+      'user_type' : userType,
     })
     let error = created.error
     if(created != null && !error){
