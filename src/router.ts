@@ -31,6 +31,7 @@ routes.put('/user/changePassword',users.updatePassword)
 routes.post('/location/type/',locationType.create)
 routes.get('/location/type/',locationType.list)
 routes.delete('/location/type/:id',locationType.delete)
+routes.put('/location/type/:id',locationType.edit)
 //controle de reservas 
 routes.post('/reserve/',reserves.create)
 routes.put('/reserve/:reserveId',reserves.update)

@@ -59,6 +59,49 @@ class TypeLocationController{
         const list = await model.list()
         return res.json(list)
     }
+
+    async edit(req:Request,res:Response){
+        const {path} = req.route
+        const {id} = req.params
+        const {description} = req.body
+        const {userid,authorization} = req.headers
+        if(!verifier.verifyNullIncommingFields({userid,authorization})) return res.status(400).json({"message":"Campo obrigatório"});
+        //Checks whether the session is valid
+        const logged = await session.verify(authorization)
+        if(!logged.is_valid)return res.status(401).json({error:"Sessão inválida"});
+        //checks if the user has permission to access the endpoint
+        //const grant:any = await permission.verify(userid,path);
+        //if(!grant.granted){
+        //    return res.status(403).json({error:"Você não possui permissão para acesso"})
+        //}
+        const returnable = await model.update(id,description);
+        if(returnable.error){
+            return res.status(404).json(returnable)
+        }else{
+            return res.json(returnable)
+        }
+    }
+
+    async detail(req:Request,res:Response){
+        const {path} = req.route
+        const {id} = req.params
+        const {userid,authorization} = req.headers
+        if(!verifier.verifyNullIncommingFields({userid,authorization})) return res.status(400).json({"message":"Campo obrigatório"});
+        //Checks whether the session is valid
+        const logged = await session.verify(authorization)
+        if(!logged.is_valid)return res.status(401).json({error:"Sessão inválida"});
+        //checks if the user has permission to access the endpoint
+        //const grant:any = await permission.verify(userid,path);
+        //if(!grant.granted){
+        //    return res.status(403).json({error:"Você não possui permissão para acesso"})
+        //}
+        const returnable = await model.detail(Number(id))
+        if(returnable.error){
+            return res.status(404).json(returnable)
+        }else{
+            return res.json(returnable)
+        }
+    }
 }
 
 export default TypeLocationController
