@@ -210,7 +210,7 @@ export default class UserModel{
         .where('active',true)
         .orderBy('name')
         .limit(perPage || 10)
-        .offset((page*perPage) || 1)       
+        .offset((page*perPage) || 0)       
         .then(data=>{
             if(data[0]){
                 returnable = {

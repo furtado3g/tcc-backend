@@ -19,6 +19,7 @@ export async function up(knex: Knex) {
     table.increments("id").primary();
     table.text("comments").nullable();
     table.integer("capacity").notNullable();
+    table.boolean('disabled').defaultTo(false)
     table.integer('type')
       .references('id')
       .inTable('type_location')
