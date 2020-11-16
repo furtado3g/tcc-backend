@@ -13,12 +13,12 @@ class TypeLocationModel {
     }
     await db("type_location")
       .insert({ description })
-      .then((data) => {
+      .then((data: any) => {
         returnable = {
           message: "Tipo de espaço cadastrado",
         };
       })
-      .catch((e) => {
+      .catch((e: any) => {
         return (returnable = {
           message: "Erro ao criar novo tipo de espaço",
         });
@@ -30,11 +30,27 @@ class TypeLocationModel {
     let returnable;
     await db("type_location")
       .select("*")
-      .then((data) => {
+      .then((data: any) => {
         returnable = data;
       })
-      .catch((e) => {
+      .catch((e: any) => {
         returnable = { error: e };
+      });
+    return returnable;
+  }
+
+  async update(locationTypeId: string, description: string) {
+    let returnable: any;
+    await db("type_location")
+      .where("id", locationTypeId)
+      .update({
+        description: description,
+      })
+      .then((data: any) => {
+        returnable.message = "Tipo de local alterado com sucesso";
+      })
+      .catch((e: any) => {
+        returnable.error = "Erro ao alterar tipo de local";
       });
     return returnable;
   }
@@ -51,19 +67,18 @@ class TypeLocationModel {
     await db("type_location")
       .where("id", id)
       .delete()
-      .then((data) => {
+      .then((data: any) => {
         returnable = {
           message: "Tipo de espaço excluído com sucesso",
         };
       })
-      .catch((e) => {
+      .catch((e: any) => {
         returnable = {
           message: "Erro ao excluir tipo de espaço",
         };
       });
     return returnable;
   }
-
   async detail(id: string) {
     return await db("type_location")
       .select("*")
