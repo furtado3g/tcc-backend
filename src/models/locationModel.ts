@@ -71,8 +71,8 @@ class LocationModel {
     if (page !== null) {
       await db("locations")
         .select("*")
-        .limit(perPage || 10)
-        .offset((page * perPage )  == 0 ? 1 :  page * perPage ) 
+        .limit(perPage || 5)
+        .offset((page * perPage )||0) 
         .then((data) => {
           returnable = {
             numberofPages: numberofPages.length / (perPage || 10),
