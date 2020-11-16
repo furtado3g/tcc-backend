@@ -30,6 +30,7 @@ class TypeLocationModel {
     let returnable;
     await db("type_location")
       .select("*")
+      .where('disabled',false)
       .then((data: any) => {
         returnable = data;
       })
@@ -64,7 +65,9 @@ class TypeLocationModel {
     }
     await db("type_location")
       .where("id", id)
-      .delete()
+      .update({
+        disabled : true
+      })
       .then((data: any) => {
         returnable = {
           message: "Tipo de espaço excluído com sucesso",

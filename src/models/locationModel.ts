@@ -54,7 +54,9 @@ class LocationModel {
     }
     const deletedRows = await db("locations")
       .where("id", locationId)
-      .delete()
+      .update({
+        disabled : true
+      })
       .then((data) => {
         returnable = { message: "Espaço excluído com sucesso" };
       })
@@ -71,8 +73,9 @@ class LocationModel {
     if (page !== null) {
       await db("locations")
         .select("*")
+        .where('disabled',false)
         .limit(perPage || 5)
-        .offset((page * perPage )||0) 
+        .offset((page * perPage )||0)
         .then((data) => {
           returnable = {
             numberofPages: numberofPages.length / (perPage || 10),
