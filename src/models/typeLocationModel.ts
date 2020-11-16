@@ -40,19 +40,17 @@ class TypeLocationModel {
   }
 
   async update(locationTypeId: string, description: string) {
-    let returnable: any;
-    await db("type_location")
+    return await db("type_location")
       .where("id", locationTypeId)
       .update({
         description: description,
       })
       .then((data: any) => {
-        returnable.message = "Tipo de local alterado com sucesso";
+        return { message: "Tipo de local alterado com sucesso" };
       })
       .catch((e: any) => {
-        returnable.error = "Erro ao alterar tipo de local";
+        return { error : "Erro ao alterar tipo de local" }
       });
-    return returnable;
   }
 
   async delete(id: string) {

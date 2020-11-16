@@ -82,7 +82,7 @@ class TypeLocationController{
             return res.json(detail)
         }
     }
-    
+
     async edit(req:Request,res:Response){
         const {path} = req.route
         const {id} = req.params
@@ -98,7 +98,8 @@ class TypeLocationController{
         //    return res.status(403).json({error:"Você não possui permissão para acesso"})
         //}
         const returnable = await model.update(id,description);
-        if(returnable.error){
+        const {error}:any = returnable 
+        if(error){
             return res.status(404).json(returnable)
         }else{
             return res.json(returnable)
