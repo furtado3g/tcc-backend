@@ -59,6 +59,30 @@ class TypeLocationController{
         const list = await model.list()
         return res.json(list)
     }
+
+    async detaiL(req:Request,res:Response){
+        const {path} = req.route
+        const {userid,authorization} = req.headers
+        const {id} = req.params
+        if(!verifier.verifyNullIncommingFields({userid,authorization})) return res.status(404).json({"message":"Campo obrigatório"});
+        //Checks whether the session is valid
+        const logged = await session.verify(authorization)
+        if(!logged.is_valid)return res.status(403).json({error:"Sessão inválida"});
+        //checks if the user has permission to access the endpoint
+        //const grant:any = await permission.verify(userid,path);
+        //if(!grant.granted){
+        //    return res.status(401).json({error:"Você não possui permissão para acesso"})
+        //}
+        const detail = await model.detail(id) 
+        console.log(detail)
+        const {error}:any = detail
+        if(error){
+            return res.status(404).json(detail)
+        }else{
+            return res.json(detail)
+        }
+
+    }
 }
 
 export default TypeLocationController
