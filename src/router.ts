@@ -42,7 +42,7 @@ routes.delete('/reserve/:reserveId',reserves.delete)
 //controle de responsaveis do local
 routes.post('/location/user/',locationUser.assign)
 routes.delete('/location/user/:locationUserId',locationUser.unassign)
-routes.get('/location/user/:userId',locationUser.listAssigns)
+routes.get('/location/user/:id',locationUser.listAssigns)
 //controle de locais
 routes.post('/location/',location.new)
 routes.put('/location/:locationId',location.update)
