@@ -74,7 +74,7 @@ class LocationModel {
       await db.from('locations')
         .join('type_location','type_location.id','locations.type')
         .select('type_location.description as ds_location_type','locations.id','locations.comments','locations.capacity')
-        .where('disabled',false)
+        .where('locations.disabled',false)
         .limit(perPage || 5)
         .offset((page * perPage )||0)
         .then((data) => {
