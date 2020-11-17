@@ -61,6 +61,28 @@ class LocationUserModel{
         })
         return returnable
     }
+
+    async detail(userId:string,locationId:string){
+        return await db('user_location')
+        .select('*')
+        .where('user_id',userId)
+        .where('location_id',locationId)
+        .then(data=>{
+            if(data[0]){
+                return data[0]
+            }else{
+                return {
+                    message: "Não foi encontrada a atribuição de local ao usuario"
+                }
+            }
+        })
+        .catch(e=>{
+            return{
+                error : "Ocorreu um erro ao buscar dados sobre a atribuição de local e usuario"
+            }
+        })
+
+    }
 }
 
 export default LocationUserModel

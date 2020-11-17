@@ -57,6 +57,30 @@ class LocationUserController{
         //}
         return res.json(await model.listPerUser(id))
     }
+
+    async detail(req: Request, res: Response){
+        const {path} = req.route
+        const {userid,authorization} = req.headers
+        const {id,locationId} = req.params
+        if(!verifier.verifyNullIncommingFields({authorization,id,userid})) return res.status(404).json({"message":"Campo obrigatório"});
+        //Checks whether the session is valid
+        const logged = await session.verify(authorization)
+        if(!logged.is_valid)return res.status(403).json({error:"Sessão inválida"});
+        //checks if the user has permission to access the endpoint
+        //const grant:any = await permission.verify(userid,path);
+        //if(!grant.granted){
+        //    return res.status(404).json({error:"Você não possui permissão para acesso"})
+        //}
+        const data =  await model.detail(id,locationId)
+        if(data.message){
+            return res.status(404).json(data)
+        }else if(data.error){
+            return res.status(422).json(data)
+        }else{
+            return res.json(data)
+        }
+    }
+
 }
 
 export default LocationUserController
