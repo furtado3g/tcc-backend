@@ -83,7 +83,7 @@ class ReserveModel{
         attachPaginate();
         const itens = await db('reservations')
         .limit(perPage || 10)
-        .offset((page*perPage) || 1)
+        .offset((page*perPage) || 0)
         .select('*')
         return itens
     }

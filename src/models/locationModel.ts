@@ -84,6 +84,7 @@ class LocationModel {
         });
     } else {
       await db("locations")
+        .join('type_location','type_location.id','locations.type')
         .select("*")
         .then((data) => {
           returnable = {
