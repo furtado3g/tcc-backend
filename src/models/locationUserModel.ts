@@ -62,9 +62,10 @@ class LocationUserModel{
 
     async detail(userId:string,locationId:string){
         return await db('user_location')
-        .select('*')
+        .select('user_location.id','user_location.location_id','locations.comments')
         .where('user_id',userId)
         .where('location_id',locationId)
+        .join('locations','locations.id','user_location.location_id')
         .then(data=>{
             if(data[0]){
                 return data[0]
