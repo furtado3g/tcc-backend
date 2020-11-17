@@ -50,7 +50,8 @@ class LocationUserModel{
         let returnable
         const listOfUserLocatios = await db('user_location')
         .where('user_id',id)
-        .select('*')
+        .select('user_location.id','user_location.location_id','locations.comments')
+        .join('locations','locations.id','user_location.location_id')
         .then(data=>{
             returnable = data
         })
