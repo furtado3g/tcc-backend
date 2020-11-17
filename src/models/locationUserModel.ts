@@ -7,7 +7,6 @@ interface ILocationUser{
 class LocationUserModel{
 
     async new(locationUser : ILocationUser){
-        let returnable
         const relationExists = await db('user_location')
         .select('*')
         .where('user_id',locationUser.user_id)
@@ -17,15 +16,14 @@ class LocationUserModel{
                 error : "Relacionamento já existente"
             }            
         }
-        await db('user_location')
+        return await db('user_location')
         .insert(locationUser)
         .then(data=>{
-            returnable = { message : "Espaço atribuído ao usuário" }
+            return { message : "Espaço atribuído ao usuário" }
         })
         .catch(e=>{
-            returnable = { error : "Erro ao atribuir relacionamento"}
+            return { error : "Erro ao atribuir relacionamento"}
         })
-        return returnable
     }
 
     async delete(id:string){

@@ -12,18 +12,24 @@ class LocationUserController{
 
     async assign(req:Request,res:Response){
         const {path} = req.route
-        const {user_id,authorization} = req.headers
+        const {userid,authorization} = req.headers
         const {locationId,userId} = req.body
-        if(!verifier.verifyNullIncommingFields({user_id,authorization})) return res.status(404).json({"message":"Campo obrigatório"});
+        if(!verifier.verifyNullIncommingFields({userid,authorization})) return res.status(404).json({"message":"Campo obrigatório"});
         //Checks whether the session is valid
         const logged = await session.verify(authorization)
         if(!logged.is_valid)return res.status(404).json({error:"Sessão inválida"});
         //checks if the user has permission to access the endpoint
-        const grant:any = await permission.verify(user_id,path);
-        if(!grant.granted){
-        return res.status(404).json({error:"Você não possui permissão para acesso"})
+        //const grant:any = await permission.verify(user_id,path);
+        //if(!grant.granted){
+            //return res.status(404).json({error:"Você não possui permissão para acesso"})
+        //}
+        const data = await model.new({location_id:locationId,user_id:userId})
+        const {error,message} : any = data
+        if(message && !error){
+            return res.json(data)
+        }else{
+            return res.status(404).json(data)
         }
-        return res.json( await model.new({location_id:locationId,user_id:userId}))
     }
 
     async unassign(req:Request,res:Response){
