@@ -72,7 +72,8 @@ class LocationModel {
     console.log(page)
     if (page !== null) {
       await db("locations")
-        .select("*")
+        .join('type_location','type_location.id','locations.type')
+        .select('type_location.desctiption','locations.id','locations.desctiption','locations.capacity')
         .where('disabled',false)
         .limit(perPage || 5)
         .offset((page * perPage )||0)
