@@ -81,7 +81,6 @@ class ReserveModel{
     }
 
     async list(page:any,perPage:any){
-        attachPaginate();
         const itens = await db('reservations')
         .limit(perPage || 10)
         .offset((page*perPage) || 0)

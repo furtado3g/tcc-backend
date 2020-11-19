@@ -155,8 +155,8 @@ class ReserveController {
 
   async list(req: Request, res: Response) {
     const { path } = req.route;
-    const { user_id, authorization } = req.headers;
-    if (!verifier.verifyNullIncommingFields({ user_id, authorization }))
+    const { userid, authorization } = req.headers;
+    if (!verifier.verifyNullIncommingFields({ userid, authorization }))
       return res.status(404).json({ message: "Campo obrigatório não informado" });
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
