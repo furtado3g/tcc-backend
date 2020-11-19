@@ -35,19 +35,28 @@ class ReserveModel {
       };
     }
     return await db("reservations")
-      .insert(reserve)
+      .insert({
+        teacher_id: reserve.teacher_id,
+        location_id: reserve.location_id,
+        date: reserve.date,
+        time_start: moment(reserve.time_start).format(this.format),
+        time_end: moment(reserve.time_end).format(this.format),
+        class: reserve.class,
+        discipline: reserve.discipline,
+        comments: reserve.comments,
+      })
       .then((data) => {
         console.log(data);
         return {
           message: "Reserva efetuada com sucesso",
         };
-      })
-      //.catch((e) => {
-      //  //traduzir retorno a baixo
-      //  return {
-      //    error: "Erro ao realizar reserva",
-      //  };
-      //});
+      });
+    //.catch((e) => {
+    //  //traduzir retorno a baixo
+    //  return {
+    //    error: "Erro ao realizar reserva",
+    //  };
+    //});
   }
 
   async update(reserve: reserveInterface, reserveId: number) {
