@@ -42,12 +42,12 @@ class ReserveModel {
           message: "Reserva efetuada com sucesso",
         };
       })
-      .catch((e) => {
-        //traduzir retorno a baixo
-        return {
-          error: "Erro ao realizar reserva",
-        };
-      });
+      //.catch((e) => {
+      //  //traduzir retorno a baixo
+      //  return {
+      //    error: "Erro ao realizar reserva",
+      //  };
+      //});
   }
 
   async update(reserve: reserveInterface, reserveId: number) {
