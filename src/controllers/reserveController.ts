@@ -29,12 +29,12 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    const grant: any = await permission.verify(user_id, path);
-    if (!grant.granted) {
-      return res
-        .status(404)
-        .json({ error: "Você não possui permissão para acesso" });
-    }
+    //const grant: any = await permission.verify(user_id, path);
+    //if (!grant.granted) {
+    //  return res
+    //    .status(404)
+    //    .json({ error: "Você não possui permissão para acesso" });
+    //}
     const reserveModel = new ReserveModel();
     const {
       userId,
@@ -108,12 +108,12 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    const grant: any = await permission.verify(user_id, path);
-    if (!grant.granted) {
-      return res
-        .status(404)
-        .json({ error: "Você não possui permissão para acesso" });
-    }
+    //const grant: any = await permission.verify(user_id, path);
+    //if (!grant.granted) {
+    //  return res
+    //    .status(404)
+    //    .json({ error: "Você não possui permissão para acesso" });
+    //}
     return res.json(
       await reserveModel.update(
         {
@@ -144,12 +144,12 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    const grant: any = await permission.verify(user_id, path);
-    if (!grant.granted) {
-      return res
-        .status(404)
-        .json({ error: "Você não possui permissão para acesso" });
-    }
+    //const grant: any = await permission.verify(user_id, path);
+    //if (!grant.granted) {
+    //  return res
+    //    .status(404)
+    //    .json({ error: "Você não possui permissão para acesso" });
+    //}
     return res.json(await reserveModel.delete(Number(reserveId)));
   }
 
@@ -163,12 +163,12 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    const grant: any = await permission.verify(user_id, path);
-    if (!grant.granted) {
-      return res
-        .status(404)
-        .json({ error: "Você não possui permissão para acesso" });
-    }
+    //const grant: any = await permission.verify(user_id, path);
+    //if (!grant.granted) {
+    //  return res
+    //    .status(404)
+    //    .json({ error: "Você não possui permissão para acesso" });
+    //}
     const { page, perPage } = req.query;
     return res.json(await reserveModel.list(Number(page), Number(perPage)));
   }
@@ -186,12 +186,12 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    const grant: any = await permission.verify(user_id, path);
-    if (!grant.granted) {
-      return res
-        .status(404)
-        .json({ error: "Você não possui permissão para acesso" });
-    }
+    //const grant: any = await permission.verify(user_id, path);
+    //if (!grant.granted) {
+    //  return res
+    //    .status(404)
+    //    .json({ error: "Você não possui permissão para acesso" });
+    //}
     return res.json(await reserveModel.detail(reserveId));
   }
 }
