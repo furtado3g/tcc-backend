@@ -34,21 +34,20 @@ class ReserveModel {
         message: "Espaço já reservado",
       };
     }
-    const insertedRows = await db("reservations")
+    return await db("reservations")
       .insert(reserve)
       .then((data) => {
         console.log(data);
-        returnable = {
+        return {
           message: "Reserva efetuada com sucesso",
         };
       })
       .catch((e) => {
         //traduzir retorno a baixo
-        returnable = {
+        return {
           error: "Erro ao realizar reserva",
         };
       });
-    return returnable;
   }
 
   async update(reserve: reserveInterface, reserveId: number) {
