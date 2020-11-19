@@ -23,7 +23,7 @@ interface reserveInterface {
 class ReserveController {
   async create(req: Request, res: Response) {
     const { path } = req.route;
-    const { user_id, authorization } = req.headers;
+    const { userid, authorization } = req.headers;
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
     if (!logged.is_valid)

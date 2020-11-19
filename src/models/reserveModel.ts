@@ -1,5 +1,5 @@
 import db from "../database/connection";
-
+import moment from 'moment'
 import { attachPaginate } from 'knex-paginate' ;
 
 
@@ -15,14 +15,15 @@ interface reserveInterface{
 }
 
 class ReserveModel{
+    format = 'HH:mm';
     
     async insert (reserve:reserveInterface){
         let returnable
         const labIsTaken = await db('reservations')
         .where('location_id',reserve.location_id)
-        .where('date',reserve.date)
-        .whereBetween('time_start',[reserve.time_end,reserve.time_start])
-        .whereBetween('time_end',[reserve.time_end,reserve.time_start])
+        .where('date',moment(reserve.date).toISOString)
+        .whereBetween('time_start',[moment(reserve.time_end,this.format),moment(reserve.time_start,this.format)])
+        .whereBetween('time_end',[moment(reserve.time_end,this.format),moment(reserve.time_start,this.format)])
         if(labIsTaken[0]){
             return {
                 message : "Espaço já reservado"
