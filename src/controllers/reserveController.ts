@@ -75,7 +75,7 @@ class ReserveController {
 
   async update(req: Request, res: Response) {
     const { path } = req.route;
-    const { user_id, authorization } = req.headers;
+    const { userid, authorization } = req.headers;
     const { reserveId } = req.params;
     const {
       userId,
@@ -98,7 +98,7 @@ class ReserveController {
         classes,
         discipline,
         comments,
-        user_id,
+        userid,
         authorization,
       })
     )
