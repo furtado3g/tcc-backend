@@ -111,7 +111,7 @@ class ReserveModel {
   async detail(reserveId: any) {
     return await db("reservations as res")
     .select("*")
-    .where("id", reserveId)
+    .where("res.id", reserveId)
     .join('locations as loc','loc.id','res.location_id')
     .join('users as use','use.id','res.teacher_id')
     .then(data=>{
