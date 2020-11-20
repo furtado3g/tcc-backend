@@ -82,7 +82,6 @@ class ReserveModel {
       //    error: "Erro ao atualizar reserva",
       //  };
       //});
-    return returnable;
   }
 
   async delete(reserveId: any) {
