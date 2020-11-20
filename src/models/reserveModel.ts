@@ -65,7 +65,7 @@ class ReserveModel {
       .update({
         teacher_id: reserve.teacher_id,
         location_id: reserve.location_id,
-        date: reserve.date,
+        date: moment(reserve.date).toISOString,
         time_start: moment(reserve.time_start).format(this.format),
         time_end: moment(reserve.time_end).format(this.format),
         class: reserve.class,
