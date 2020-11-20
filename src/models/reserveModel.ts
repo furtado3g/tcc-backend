@@ -78,11 +78,11 @@ class ReserveModel {
           message: "Reserva atualizada com sucesso",
         };
       })
-      .catch(() => {
-        returnable = {
-          error: "Erro ao atualizar reserva",
-        };
-      });
+      //.catch(() => {
+      //  returnable = {
+      //    error: "Erro ao atualizar reserva",
+      //  };
+      //});
     return returnable;
   }
 
