@@ -48,14 +48,10 @@ class ReserveController {
     } = req.body;
     if (
       !verifier.verifyNullIncommingFields({
-        userId,
-        locationId,
-        date,
-        time_start,
-        time_end,
-        classes,
-        discipline,
-        comments,
+        userId,locationId,
+        date,time_start,
+        time_end,classes,
+        discipline,comments,
       })
     )
       return res.status(404).json({ message: "Campo obrigatório não informado" });
