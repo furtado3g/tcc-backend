@@ -98,25 +98,39 @@ class ReserveModel {
 
   async list(page: any, perPage: any) {
     return await db("reservations")
-    .select("*")
-    .then(data=>{
-        return data
-    })
-    .catch(e=>{
-        return{ error : "Ocorreu um erro ao buscar eventos, Tente novamente mais tarde"}
-    });
-    
+      .select("*")
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => {
+        return {
+          error:
+            "Ocorreu um erro ao buscar eventos, Tente novamente mais tarde",
+        };
+      });
   }
 
   async detail(reserveId: any) {
     return await db("reservations as res")
-    .select("*")
-    .where("res.id", reserveId)
-    .join('locations as loc','loc.id','res.location_id')
-    .join('users as use','use.id','res.teacher_id')
-    .then(data=>{
-        return data
-    });
+      .select(
+        "res.id",
+        "res.date",
+        "res.time_start",
+        "res.time_end",
+        "res.class",
+        "res.discipline",
+        "res.comments",
+        'res.teacher_id',
+        'res.location_id',
+        "loc.comments as location_name",
+        "use.name as user_name"
+      )
+      .where("res.id", reserveId)
+      .join("locations as loc", "loc.id", "res.location_id")
+      .join("users as use", "use.id", "res.teacher_id")
+      .then((data) => {
+        return data;
+      });
   }
 }
 
