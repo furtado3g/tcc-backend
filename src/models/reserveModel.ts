@@ -97,16 +97,26 @@ class ReserveModel {
   }
 
   async list(page: any, perPage: any) {
-    const itens = await db("reservations")
-      .limit(perPage || 10)
-      .offset(page * perPage || 0)
-      .select("*");
-    return itens;
+    return await db("reservations")
+    .select("*")
+    .then(data=>{
+        return data
+    })
+    .catch(e=>{
+        return{ error : "Ocorreu um erro ao buscar eventos, Tente novamente mais tarde"}
+    });
+    
   }
 
   async detail(reserveId: any) {
-    const reserve = db("reservations").select("*").where("id", reserveId);
-    return reserve;
+    return await db("reservations as res")
+    .select("*")
+    .where("id", reserveId)
+    .join('locations as loc','loc.id','res.location_id')
+    .join('users as use','use.id','res.teacher_id')
+    .then(data=>{
+        return data
+    });
   }
 }
 
