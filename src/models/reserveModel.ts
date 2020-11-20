@@ -6,7 +6,7 @@ interface reserveInterface {
   teacher_id: number;
   location_id: number;
   date: string;
-  time_start: string;
+  time_start: string;   
   time_end: string;
   class: string;
   discipline: string;
