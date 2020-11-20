@@ -61,10 +61,18 @@ class ReserveModel {
 
   async update(reserve: reserveInterface, reserveId: number) {
     let returnable;
-    console.log(reserve);
     const insertedRows = await db("reservations")
       .where("id", reserveId)
-      .update(reserve)
+      .update({
+        teacher_id: reserve.teacher_id,
+        location_id: reserve.location_id,
+        date: reserve.date,
+        time_start: moment(reserve.time_start).format(this.format),
+        time_end: moment(reserve.time_end).format(this.format),
+        class: reserve.class,
+        discipline: reserve.discipline,
+        comments: reserve.comments,
+      })
       .then((data) => {
         returnable = {
           message: "Reserva atualizada com sucesso",
