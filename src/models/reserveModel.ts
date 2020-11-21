@@ -22,12 +22,12 @@ class ReserveModel {
       .where("location_id", reserve.location_id)
       .where("date", moment(reserve.date))
       .whereBetween("time_start", [
-        moment(reserve.time_end).format(this.format),
-        moment(reserve.time_start).format(this.format),
+        moment(reserve.time_end,this.format).format(this.format),
+        moment(reserve.time_start,this.format).format(this.format),
       ])
       .whereBetween("time_end", [
-        moment(reserve.time_end).format(this.format),
-        moment(reserve.time_start).format(this.format),
+        moment(reserve.time_end,this.format).format(this.format),
+        moment(reserve.time_start,this.format).format(this.format),
       ]);
     if (labIsTaken[0]) {
       return {
