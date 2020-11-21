@@ -47,7 +47,6 @@ class ReserveController {
       discipline,
       comments,
     }: any = req.body;
-    console.log(req.body);
     if (
       !verifier.verifyNullIncommingFields({
         userId,
