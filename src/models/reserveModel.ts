@@ -20,8 +20,8 @@ class ReserveModel {
     let returnable;
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
-      .where("date", moment(reserve.date,'DD/MM/YYYY'))
-      .whereBetween("time_start",[reserve.time_end, reserve.time_start])
+      .where("date", moment(reserve.date, "DD/MM/YYYY"))
+      .whereBetween("time_start", [reserve.time_end, reserve.time_start])
       .whereBetween("time_end", [reserve.time_end, reserve.time_start]);
     if (labIsTaken[0]) {
       return {
@@ -32,7 +32,7 @@ class ReserveModel {
       .insert({
         teacher_id: reserve.teacher_id,
         location_id: reserve.location_id,
-        date: moment(reserve.date,'DD/MM/YYYY').toString(),
+        date: moment(reserve.date, "DD/MM/YYYY").toString(),
         time_start: reserve.time_start,
         time_end: reserve.time_end,
         class: reserve.class,
@@ -43,13 +43,13 @@ class ReserveModel {
         return {
           message: "Reserva efetuada com sucesso",
         };
+      })
+      .catch((e) => {
+        //traduzir retorno a baixo
+        return {
+          error: "Erro ao realizar reserva",
+        };
       });
-    //.catch((e) => {
-    //  //traduzir retorno a baixo
-    //  return {
-    //    error: "Erro ao realizar reserva",
-    //  };
-    //});
   }
 
   async update(reserve: reserveInterface, reserveId: number) {
@@ -69,19 +69,21 @@ class ReserveModel {
         return {
           message: "Reserva atualizada com sucesso",
         };
-      });
-    //.catch(() => {
-    //  returnable = {
-    //    error: "Erro ao atualizar reserva",
-    //  };
-    //});
+      })
+    .catch(() => {
+      return {
+        error: "Erro ao atualizar reserva",
+      };
+    });
   }
 
   async delete(reserveId: any) {
     let returnable;
     const deletedRows = await db("reservations")
       .where("id", "=", reserveId)
-      .delete()
+      .update({
+        active: false,
+      })
       .then((data) => {
         returnable = {
           message: "Reserva excluída com sucesso",
@@ -98,6 +100,7 @@ class ReserveModel {
   async list(page: any, perPage: any) {
     return await db("reservations")
       .select("*")
+      .where("active", true)
       .then((data) => {
         return data;
       })

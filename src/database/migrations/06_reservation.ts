@@ -37,6 +37,7 @@ export async function up(knex: Knex) {
     table.string("class").nullable();
     table.string("discipline").nullable();
     table.text("comments").nullable();
+    table.boolean('active').defaultTo(true)
     table
       .integer("location_id")
       .references("id")
