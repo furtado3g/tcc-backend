@@ -46,9 +46,10 @@ class ReserveController {
       discipline,
       comments,
     } = req.body;
+    console.log(req.body)
     if (
       !verifier.verifyNullIncommingFields({
-        locationId,
+        userId,locationId,
         date,time_start,
         time_end,classes,
         discipline,comments,
