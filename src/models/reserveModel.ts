@@ -99,7 +99,6 @@ class ReserveModel {
     return await db("reservations")
       .select("*")
       .then((data) => {
-        console.log(data) 
         return data;
       })
       .catch((e) => {
