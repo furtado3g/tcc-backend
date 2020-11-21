@@ -34,6 +34,7 @@ class ReserveModel {
         message: "Espaço já reservado",
       };
     }
+    console.log(reserve.date)
     return await db("reservations")
       .insert({
         teacher_id: reserve.teacher_id,

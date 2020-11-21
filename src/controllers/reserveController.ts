@@ -3,6 +3,7 @@ import ReserveModel from "../models/reserveModel";
 import SessionModel from "../models/sessionModel";
 import PermissionModel from "../models/permissionModel";
 import verify from "../util/verify";
+import moment from "moment";
 
 const verifier = new verify();
 const permission = new PermissionModel();
@@ -45,27 +46,32 @@ class ReserveController {
       classes,
       discipline,
       comments,
-    } = req.body;
-    console.log(req.body)
+    }: any = req.body;
+    console.log(req.body);
     if (
       !verifier.verifyNullIncommingFields({
-        userId,locationId,
-        date,time_start,
-        time_end,classes,
+        userId,
+        locationId,
+        date,
+        time_start,
+        time_end,
+        classes,
         discipline,
       })
     )
-      return res.status(404).json({ message: "Campo obrigatório não informado" });
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
     return res.json(
       await reserveModel.insert({
         teacher_id: userId,
         location_id: locationId,
         date: date,
-        time_start,
-        time_end,
+        time_start: time_start,
+        time_end: time_end,
         class: classes,
-        discipline,
-        comments,
+        discipline: discipline,
+        comments: comments,
       })
     );
   }
@@ -99,7 +105,9 @@ class ReserveController {
         authorization,
       })
     )
-      return res.status(404).json({ message: "Campo obrigatório não informado" });
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
     if (!logged.is_valid)
@@ -135,7 +143,9 @@ class ReserveController {
     if (
       !verifier.verifyNullIncommingFields({ reserveId, user_id, authorization })
     )
-      return res.status(404).json({ message: "Campo obrigatório não informado" });
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
     if (!logged.is_valid)
@@ -154,7 +164,9 @@ class ReserveController {
     const { path } = req.route;
     const { userid, authorization } = req.headers;
     if (!verifier.verifyNullIncommingFields({ userid, authorization }))
-      return res.status(404).json({ message: "Campo obrigatório não informado" });
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
     if (!logged.is_valid)
@@ -177,7 +189,9 @@ class ReserveController {
     if (
       !verifier.verifyNullIncommingFields({ reserveId, userid, authorization })
     )
-      return res.status(404).json({ message: "Campo obrigatório não informado" });
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
     //Checks whether the session is valid
     const logged = await session.verify(authorization);
     if (!logged.is_valid)
