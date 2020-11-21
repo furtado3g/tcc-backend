@@ -6,7 +6,7 @@ interface reserveInterface {
   teacher_id: number;
   location_id: number;
   date: string;
-  time_start: string;   
+  time_start: string;
   time_end: string;
   class: string;
   discipline: string;
@@ -21,20 +21,14 @@ class ReserveModel {
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
       .where("date", moment(reserve.date))
-      .whereBetween("time_start", [
-        moment(reserve.time_end,this.format).format(this.format),
-        moment(reserve.time_start,this.format).format(this.format),
-      ])
-      .whereBetween("time_end", [
-        moment(reserve.time_end,this.format).format(this.format),
-        moment(reserve.time_start,this.format).format(this.format),
-      ]);
+      .whereBetween("time_start",[reserve.time_end, reserve.time_start])
+      .whereBetween("time_end", [reserve.time_end, reserve.time_start]);
     if (labIsTaken[0]) {
       return {
         message: "Espaço já reservado",
       };
     }
-    console.log(reserve.date)
+    console.log(reserve.date);
     return await db("reservations")
       .insert({
         teacher_id: reserve.teacher_id,
@@ -77,12 +71,12 @@ class ReserveModel {
         return {
           message: "Reserva atualizada com sucesso",
         };
-      })
-      //.catch(() => {
-      //  returnable = {
-      //    error: "Erro ao atualizar reserva",
-      //  };
-      //});
+      });
+    //.catch(() => {
+    //  returnable = {
+    //    error: "Erro ao atualizar reserva",
+    //  };
+    //});
   }
 
   async delete(reserveId: any) {
@@ -127,8 +121,8 @@ class ReserveModel {
         "res.class",
         "res.discipline",
         "res.comments",
-        'res.teacher_id',
-        'res.location_id',
+        "res.teacher_id",
+        "res.location_id",
         "loc.comments as location_name",
         "use.name as user_name"
       )
