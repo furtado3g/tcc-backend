@@ -29,7 +29,7 @@ class ReserveController {
     if (!logged.is_valid)
       return res.status(404).json({ error: "Sessão inválida" });
     //checks if the user has permission to access the endpoint
-    //const grant: any = await permission.verify(user_id, path);
+    //const grant: any = await permission.verify(userid, path);
     //if (!grant.granted) {
     //  return res
     //    .status(404)
@@ -48,7 +48,7 @@ class ReserveController {
     } = req.body;
     if (
       !verifier.verifyNullIncommingFields({
-        userId,locationId,
+        locationId,
         date,time_start,
         time_end,classes,
         discipline,comments,
