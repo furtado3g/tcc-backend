@@ -1,4 +1,5 @@
 import * as nodemailer from "nodemailer";
+// @ts-ignore: Unreachable code error
 import  sgTransport from 'nodemailer-sendgrid-transport'
 import * as config from '../configs/mail.json'
 class Mail {
