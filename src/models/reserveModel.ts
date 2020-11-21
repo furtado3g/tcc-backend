@@ -33,7 +33,7 @@ class ReserveModel {
       .insert({
         teacher_id: reserve.teacher_id,
         location_id: reserve.location_id,
-        date: reserve.date,
+        date: moment(reserve.date,'DD/MM/YYYY'),
         time_start: reserve.time_start,
         time_end: reserve.time_end,
         class: reserve.class,
@@ -60,7 +60,7 @@ class ReserveModel {
       .update({
         teacher_id: reserve.teacher_id,
         location_id: reserve.location_id,
-        date: reserve.date,
+        date: moment(reserve.date,'DD/MM/YYYY'),
         time_start: reserve.time_start,
         time_end: reserve.time_end,
         class: reserve.class,
