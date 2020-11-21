@@ -40,7 +40,6 @@ class ReserveModel {
         comments: reserve.comments,
       })
       .then((data) => {
-        console.log(data.rowCount);
         return {
           message: "Reserva efetuada com sucesso",
         };
