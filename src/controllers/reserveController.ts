@@ -137,10 +137,10 @@ class ReserveController {
 
   async delete(req: Request, res: Response) {
     const { path } = req.route;
-    const { user_id, authorization } = req.headers;
+    const { userid, authorization } = req.headers;
     const { reserveId } = req.params;
     if (
-      !verifier.verifyNullIncommingFields({ reserveId, user_id, authorization })
+      !verifier.verifyNullIncommingFields({ reserveId, userid, authorization })
     )
       return res
         .status(404)
