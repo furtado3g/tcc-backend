@@ -20,7 +20,7 @@ class ReserveModel {
     let returnable;
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
-      .where("date", moment(reserve.date))
+      .where("date", reserve.date)
       .whereBetween("time_start",[reserve.time_end, reserve.time_start])
       .whereBetween("time_end", [reserve.time_end, reserve.time_start]);
     if (labIsTaken[0]) {
