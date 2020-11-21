@@ -28,7 +28,6 @@ class ReserveModel {
         message: "Espaço já reservado",
       };
     }
-    console.log(reserve.date);
     return await db("reservations")
       .insert({
         teacher_id: reserve.teacher_id,
@@ -41,7 +40,7 @@ class ReserveModel {
         comments: reserve.comments,
       })
       .then((data) => {
-        console.log(data);
+        console.log(data.rowCount);
         return {
           message: "Reserva efetuada com sucesso",
         };
@@ -101,6 +100,7 @@ class ReserveModel {
     return await db("reservations")
       .select("*")
       .then((data) => {
+        console.log(data) 
         return data;
       })
       .catch((e) => {
