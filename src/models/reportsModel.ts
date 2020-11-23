@@ -2,13 +2,13 @@ import db from "../database/connection";
 import moment from "moment";
 class ReportsModel {
   async perUser(userId: string, begin: string, end: string) {
-    return await db("reservations")
-      .where("reservations.teacher_id", userId)
-      .whereBetween("reservations.date", [
+    return await db("reservations as res")
+      .where("res.teacher_id", userId)
+      .whereBetween("res.date", [
         moment(begin, "DD/MM/YYYY"),
         moment(end, "DD/MM/YYYY"),
       ])
-      .join("locations", "locations.id", "reservations.location_id")
+      .join("locations as loc", "loc.id", "res.location_id")
       .select(
         "loc.comments as localName",
         "res.date as date",
@@ -24,4 +24,4 @@ class ReportsModel {
   }
 }
 
-export default ReportsModel
+export default ReportsModel;
