@@ -43,6 +43,28 @@ class ReportsModel {
         return data
       })
   }
+
+  async perPeriod(begin: string, end: string){
+    return await db("reservations as res")
+      .whereBetween("res.date", [
+        moment(begin, "DD/MM/YYYY"),
+        moment(end, "DD/MM/YYYY"),
+      ])
+      .join("users as usu", "usu.id", "res.teacher_id")
+      .join("locations as loc", "loc.id", "res.location_id")
+      .select(
+        "usu.name as userName",
+        "loc.comments as localName",
+        "res.date as date",
+        "res.time_start as start",
+        "res.time_end as end",
+        "res.class as class",
+        "res.discipline as discipline",
+        "res.comments as observations"
+      ).then(data=>{
+        return data
+      })
+  }
 }
 
 export default ReportsModel;
