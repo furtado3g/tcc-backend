@@ -58,5 +58,5 @@ routes.post("/usertype", permission.newUserType);
 routes.post("/permission", permission.assignPermission);
 routes.get("/user/:idUser/permissions", permission.listUserPermissions);
 //relatorios
-routes.get("reports/user/:id",reports.perUser);
+routes.get("/reports/user/:id",reports.perUser);
 export default routes;

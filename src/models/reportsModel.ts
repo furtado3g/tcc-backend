@@ -5,8 +5,8 @@ class ReportsModel {
     return await db("reservations")
       .where("reservations.teacher_id", userId)
       .whereBetween("reservations.date", [
-        moment(begin, "DD/MM/RRRR"),
-        moment(end, "DD/MM/RRRR"),
+        moment(begin, "DD/MM/YYYY"),
+        moment(end, "DD/MM/YYYY"),
       ])
       .join("locations", "locations.id", "reservations.location_id")
       .select(
