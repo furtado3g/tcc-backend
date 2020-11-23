@@ -25,12 +25,8 @@ class ReportsController {
     const logged = await session.verify(authorization);
     if (!logged.is_valid) res.status(404).json({ error: "Sessão inválida" });
     const data = await model.perUser(id, begin, end);
-    if(!data[0]){
-        res.status(404).json({"error":"Não foi encontrada nenhuma ocorrencia na data"})
-    }else{
-        res.json(data)
-    }
+    res.json(data);
   }
 }
 
-export default ReportsController 
+export default ReportsController;
