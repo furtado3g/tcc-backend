@@ -27,6 +27,28 @@ class ReportsController {
     const data = await model.perUser(id, begin, end);
     res.json(data);
   }
+
+  async perLocation(req:Request,res:Response){
+    const { id } = req.params;
+    const { begin, end }: any = req.query;
+    const { authorization, userid } = req.headers;
+    if (
+      !verify.verifyNullIncommingFields({
+        id,
+        begin,
+        end,
+        userid,
+        authorization,
+      })
+    )
+      return res
+        .status(404)
+        .json({ message: "Campo obrigatório não informado" });
+    const logged = await session.verify(authorization);
+    if (!logged.is_valid) res.status(404).json({ error: "Sessão inválida" });
+    const data =  await model.perLocation(id, begin, end)
+    res.json(data)
+  }
 }
 
 export default ReportsController;
