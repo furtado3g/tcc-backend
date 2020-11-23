@@ -60,5 +60,5 @@ routes.get("/user/:idUser/permissions", permission.listUserPermissions);
 //relatorios
 routes.get("/reports/user/:id",reports.perUser);
 routes.get("/reports/location/:id",reports.perLocation);
-routes.get("/reports/period/",reports.perPeriod);
+routes.get("/reports/period",reports.perPeriod);
 export default routes;
