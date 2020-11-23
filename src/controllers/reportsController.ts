@@ -51,12 +51,10 @@ class ReportsController {
   }
 
   async perPeriod(req: Request, res: Response){
-    const { id } = req.params;
     const { begin, end }: any = req.query;
     const { authorization, userid } = req.headers;
     if (
       !verify.verifyNullIncommingFields({
-        id,
         begin,
         end,
         userid,
