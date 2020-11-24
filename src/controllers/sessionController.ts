@@ -39,7 +39,6 @@ export default class sessionController {
         if (!verifier.verifyNullIncommingFields({ reserveId, authorization, userId, authToken }))
             return res.status(404).json({ message: "Campo obrigatório não informado" });
         const model = new SessionModel()
-        console.log(authorization)
         return res.json(await model.renew({
             "userId": userId,
             "sessionToken": authorization,

@@ -14,7 +14,6 @@ class TypeLocationController{
         const {path} = req.route
         const {userid,authorization} = req.headers
         const {description} = req.body
-        console.log({userid,authorization,description})
         if(!verifier.verifyNullIncommingFields({userid,authorization,description})) return res.status(404).json({"message":"Campo obrigatório"});
         //Checks whether the session is valid
         const logged = await session.verify(authorization)
@@ -74,7 +73,6 @@ class TypeLocationController{
         //    return res.status(401).json({error:"Você não possui permissão para acesso"})
         //}
         const detail = await model.detail(id) 
-        console.log(detail)
         const {error}:any = detail
         if(error){
             return res.status(404).json(detail)

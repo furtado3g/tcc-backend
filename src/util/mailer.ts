@@ -1,41 +1,31 @@
-import * as nodemailer from "nodemailer";
-// @ts-ignore: dont exists types 
-import  sgTransport from 'nodemailer-sendgrid-transport'
-import * as config from '../configs/mail.json'
+import sgMail from "@sendgrid/mail";
+import {api_key} from '../configs/mail.json' 
+sgMail.setApiKey(process.env.SENDGRID_API_KEY || api_key);
+
 class Mail {
+  constructor(
+    public to?: string,
+    public subject?: string,
+    public message?: string
+  ) {}
 
-    constructor(
-        public to?: string,
-        public subject?: string,
-        public message?: string) { }
-
-
-    sendMail() {
-
-        let mailOptions = {
-            from: "furtado3g@gmail.com",
-            to: this.to,
-            subject: this.subject,
-            html: this.message
-        };
-
-        const transporter = nodemailer.createTransport(sgTransport({
-            auth: {
-                api_key: config.api_key
-            }    
-        }));
-
-        transporter.sendMail(mailOptions, (error : any, info:any) => {
-            if (error) {
-                console.log(error)
-                return error;
-            } else {
-                return "E-mail enviado com sucesso!";
-            }
-        })
-    }
-
-
+  sendMail() {
+    let msg = {
+      from: "furtado3g@gmail.com",
+      to: this.to,
+      subject: this.subject,
+      html: this.message,
+      text: 'this.message',
+    };
+    return sgMail
+      .send(msg)
+      .then(() => {
+        return "E-mail enviado com sucesso!";
+      })
+      .catch((error) => {
+        return error;
+      });
+  }
 }
 
-export default new Mail;
+export default new Mail();
