@@ -12,7 +12,7 @@ let locationTypeId: any;
 describe("Login e gerenciamento de usuarios", () => {
   it("Logar na aplicação", async (done) => {
     const body = {
-      username: "furtado",
+      username: "teste",
       password: "Therev a7x",
     };
     request
@@ -47,22 +47,22 @@ describe("Login e gerenciamento de usuarios", () => {
         done();
       });
   });
-  it("Trocar senha do usuario logado", async (done) => {
-    const body = {
-      password: "Therev a7x",
-      actualPassword: "Eusouumguaxinin",
-    };
-    request
-      .put("/user/changePassword")
-      .send(body)
-      .set("authorization", headers.authorization)
-      .set("userid", headers.userId)
-      .end((err, res) => {
-        if (err) throw done(err);
-        expect(res.status).toEqual(200);
-        done();
-      });
-  });
+  //it("Trocar senha do usuario logado", async (done) => {
+  //  const body = {
+  //    password: "Therev a7x",
+  //    actualPassword: "Eusouumguaxinin",
+  //  };
+  //  request
+  //    .put("/user/changePassword")
+  //    .send(body)
+  //    .set("authorization", headers.authorization)
+  //    .set("userid", headers.userId)
+  //    .end((err, res) => {
+  //      if (err) throw done(err);
+  //      expect(res.status).toEqual(200);
+  //      done();
+  //    });
+  //});
   it("Editar um usuario", async (done) => {
     const body = {
       name: "Lucas Furtado",
@@ -158,7 +158,10 @@ describe("Teste do gereciamento de Locais", () => {
         expect(res.body[0]).toHaveProperty("comments");
         expect(res.body[0]).toHaveProperty("capacity");
         expect(res.body[0]).toHaveProperty("type");
-        locationId = res.body[0].id;
+        locationId = res.body.map((item : any)=>{
+          console.log(item)
+          if(item.description === 'Automação') return item.id
+        });
         done();
       });
   });

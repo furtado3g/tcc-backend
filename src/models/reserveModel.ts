@@ -22,8 +22,14 @@ class ReserveModel {
       .where("location_id", reserve.location_id)
       .where("date", moment(reserve.date, "DD/MM/YYYY"))
       .whereBetween("time_start", [reserve.time_end, reserve.time_start])
-      .whereBetween("time_end", [reserve.time_end, reserve.time_start]);
-    if (labIsTaken[0]) {
+      .whereBetween("time_end", [reserve.time_end, reserve.time_start])
+      .then(data=>{
+        return data[0]
+      })
+      .catch(e=>{
+        return undefined
+      });
+    if (labIsTaken) {
       return {
         message: "Espaço já reservado",
       };
