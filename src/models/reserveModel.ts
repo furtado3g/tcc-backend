@@ -24,6 +24,7 @@ class ReserveModel {
       .whereBetween("time_start", [reserve.time_start, reserve.time_end])
       .whereBetween("time_end", [reserve.time_start, reserve.time_end])
       .then((data) => {
+        console.log(data)
         return true;
       })
       .catch((e) => {
@@ -65,6 +66,7 @@ class ReserveModel {
       .whereBetween("time_start", [reserve.time_start, reserve.time_end])
       .whereBetween("time_end", [reserve.time_start, reserve.time_end])
       .then((data) => {
+        console.log(data)
         return true;
       })
       .catch((e) => {
