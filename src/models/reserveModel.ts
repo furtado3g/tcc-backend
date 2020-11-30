@@ -17,7 +17,6 @@ class ReserveModel {
   format = "HH:mm";
 
   async insert(reserve: reserveInterface) {
-    let returnable;
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
       .where("date", reserve.date)
