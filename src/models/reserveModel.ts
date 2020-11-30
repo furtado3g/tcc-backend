@@ -59,6 +59,22 @@ class ReserveModel {
   }
 
   async update(reserve: reserveInterface, reserveId: number) {
+    const labIsTaken = await db("reservations")
+      .where("location_id", reserve.location_id)
+      .where("date", moment(reserve.date, "DD/MM/YYYY"))
+      .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
+      .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
+      .then(data=>{
+        return data[0]
+      })
+      .catch(e=>{
+        return undefined
+      });
+    if (labIsTaken) {
+      return {
+        message: "Espaço já reservado",
+      };
+    }
     return await db("reservations")
       .where("id", reserveId)
       .update({
