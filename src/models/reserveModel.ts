@@ -20,13 +20,15 @@ class ReserveModel {
     let returnable;
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
-      .where("date", moment(reserve.date, "DD/MM/YYYY").toString())
-      .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
-      .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
-      .then(data=>{
-        return true
+      .where("date", reserve.date)
+      .whereBetween("time_start", [reserve.time_start, reserve.time_end])
+      .whereBetween("time_end", [reserve.time_start, reserve.time_end])
+      .then((data) => {
+        return true;
       })
-      
+      .catch((e) => {
+        false;
+      });
     if (!labIsTaken) {
       return {
         error: "Espaço já reservado",
@@ -60,11 +62,14 @@ class ReserveModel {
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
       .where("date", reserve.date)
-      .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
-      .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
-      .then(data=>{
-        return true
+      .whereBetween("time_start", [reserve.time_start, reserve.time_end])
+      .whereBetween("time_end", [reserve.time_start, reserve.time_end])
+      .then((data) => {
+        return true;
       })
+      .catch((e) => {
+        false;
+      });
     if (!labIsTaken) {
       return {
         error: "Espaço já reservado",
@@ -87,11 +92,11 @@ class ReserveModel {
           message: "Reserva atualizada com sucesso",
         };
       })
-    .catch(() => {
-      return {
-        error: "Erro ao atualizar reserva",
-      };
-    });
+      .catch(() => {
+        return {
+          error: "Erro ao atualizar reserva",
+        };
+      });
   }
 
   async delete(reserveId: any) {
