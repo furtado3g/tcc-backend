@@ -68,6 +68,7 @@ class ReserveModel {
       .where("date", reserve.date)
       .whereBetween("time_start", [reserve.time_start, reserve.time_end])
       .whereBetween("time_end", [reserve.time_start, reserve.time_end])
+      .whereNot('id',reserveId)
       .then((data) => {
         if(data[0]){
           return true;
