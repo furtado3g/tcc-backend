@@ -26,9 +26,7 @@ class ReserveModel {
       .then(data=>{
         return true
       })
-      .catch(e=>{
-        return false
-      });
+      
     if (!labIsTaken) {
       return {
         error: "Espaço já reservado",
@@ -67,9 +65,6 @@ class ReserveModel {
       .then(data=>{
         return true
       })
-      .catch(e=>{
-        return false
-      });
     if (!labIsTaken) {
       return {
         error: "Espaço já reservado",
