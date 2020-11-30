@@ -59,7 +59,7 @@ class ReserveModel {
   async update(reserve: reserveInterface, reserveId: number) {
     const labIsTaken = await db("reservations")
       .where("location_id", reserve.location_id)
-      .where("date", moment(reserve.date, "DD/MM/YYYY").toString())
+      .where("date", reserve.date)
       .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
       .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
       .then(data=>{
