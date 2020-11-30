@@ -24,12 +24,12 @@ class ReserveModel {
       .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
       .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
       .then(data=>{
-        return data[0]
+        return true
       })
       .catch(e=>{
-        return undefined
+        return false
       });
-    if (labIsTaken) {
+    if (!labIsTaken) {
       return {
         message: "Espaço já reservado",
       };
@@ -65,12 +65,12 @@ class ReserveModel {
       .whereBetween("time_start", [reserve.time_start,reserve.time_end ])
       .whereBetween("time_end", [reserve.time_start,reserve.time_end ])
       .then(data=>{
-        return data[0]
+        return true
       })
       .catch(e=>{
-        return undefined
+        return false
       });
-    if (labIsTaken) {
+    if (!labIsTaken) {
       return {
         message: "Espaço já reservado",
       };
