@@ -31,7 +31,7 @@ class ReserveModel {
       });
     if (!labIsTaken) {
       return {
-        message: "Espaço já reservado",
+        error: "Espaço já reservado",
       };
     }
     return await db("reservations")
@@ -72,7 +72,7 @@ class ReserveModel {
       });
     if (!labIsTaken) {
       return {
-        message: "Espaço já reservado",
+        error: "Espaço já reservado",
       };
     }
     return await db("reservations")
