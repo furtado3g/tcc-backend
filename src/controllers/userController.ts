@@ -95,6 +95,7 @@ export default class userController {
       'user_type' : type,
       'userid' : userid
     })
+    console.log(created)
     if(created != null ){
       return res.json(created)
     }else{
