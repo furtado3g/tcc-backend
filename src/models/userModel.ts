@@ -51,15 +51,6 @@ export default class UserModel {
   }
 
   async verifyUser(user: authUser) {
-    const usernameExists = await db("users")
-      .select("*")
-      .where("username", user.username)
-      .where("active", true);
-    if (usernameExists[0]) {
-      return {
-        error: "Nome de usuário já cadastrado",
-      };
-    }
     return await db("users")
       .where("username", user.username)
       .where("password", user.password)
