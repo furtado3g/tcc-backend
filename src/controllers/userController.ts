@@ -88,7 +88,7 @@ export default class userController {
     const logged = await session.verify(authorization)
     if(!logged.is_valid) return res.status(404).json({error:"Sessão inválida"});
     // check if any mandatory parameters do not exist
-    const created = userModel.update({
+    const created = await userModel.update({
       'name' : name,
       'username' : username, 
       'email' : email,
