@@ -36,7 +36,7 @@
     "nodemailer": "^6.4.13",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "pg": "^8.3.0",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^5.0.3",
     "swagger-ui-express": "^4.1.4"
   },
   "scripts": {
